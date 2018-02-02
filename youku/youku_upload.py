@@ -130,7 +130,7 @@ class YoukuUpload(object):
         self.logger.info('upload token of %s: %s' %
                          (self.file_name, self.upload_token))
 
-        if result['instant_upload_ok'] == 'yes':
+        if result.get('instant_upload_ok') == 'yes':
             # pass upload and finish
             # this case hasn't happen and test
             self.logger.info("instant upload %s" % self.file_name)
