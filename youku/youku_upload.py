@@ -121,7 +121,7 @@ class YoukuUpload(object):
         params['client_id'] = self.client_id
         params['access_token'] = self.access_token
 
-        url = 'https://openapi.youku.com/v2/uploads/create.json'
+        url = 'https://api.youku.com/uploads/create.json'
         r = requests.get(url, params=params)
         check_error(r, 201)
         result = r.json()
@@ -262,7 +262,7 @@ class YoukuUpload(object):
             'upload_token': self.upload_token,
             'upload_server_ip': status['upload_server_ip']
         }
-        url = 'https://openapi.youku.com/v2/uploads/commit.json'
+        url = 'https://api.youku.com/uploads/commit.json'
         r = requests.post(url, data=params)
         check_error(r, 200)
         self.finished = True
@@ -277,14 +277,14 @@ class YoukuUpload(object):
             'upload_token': self.upload_token,
             'upload_server_ip': status['upload_server_ip']
         }
-        url = 'https://openapi.youku.com/v2/uploads/cancel.json'
+        url = 'https://api.youku.com/uploads/cancel.json'
         r = requests.get(url, params=params)
         check_error(r, 200)
         self._delete_upload_state_file()
         return r.json()['upload_token']
 
     def spec(self):
-        url = 'https://openapi.youku.com/v2/schemas/upload/spec.json'
+        url = 'https://api.youku.com/schemas/upload/spec.json'
         r = requests.get(url)
         check_error(r, 200)
         return r.json()
